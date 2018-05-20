@@ -6,16 +6,15 @@
                         background-color: black;
                 }
   
-  #mountain {
-   margin:auto;
-   border-radius: 20%;
-   max-width: 80%;
-   height: auto;
-   display:block;
-    background-color: #000;
-    box-shadow: 0 0 5px 10px #000;
-   }
-  
+  #mountain 
+   {
+    background-image: url('img/Swinica.png');
+    max-width: 90%;
+    max-height: 80%;
+    margin: auto;
+    /* you need to match the shadow color to your background or image border for the desired effect*/
+    box-shadow: 0 0 8px 8px black inset;
+}
   h1   {color: blue;}
   p    {color: red;}
  </style>
@@ -24,7 +23,7 @@
 </head>
 <body>
 
- <img id="mountain" src="img/Swinica.png">
+ <div id="mountain"></div>
 
 </body>
 </html>
