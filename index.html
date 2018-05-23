@@ -4,19 +4,6 @@
 <head>
     <script src="scripts/jquery.min.js"></script>
 
-    <script>
-
-
-        setTimeout(function () {
-            $('.botContainer')[0].classList.remove('slideDown');
-        }, 500);
-
-                setTimeout(function () {
-            $('.asia')[0].classList.remove('init');
-            $('.asia')[0].classList.add('start');
-        }, 800);
-
-    </script>
 
     <style>
         html,
@@ -73,21 +60,45 @@
             -webkit-transition-duration: 1500ms;
             transition-duration: 1500ms;
 
-            top:0%;
-            left:0%;
+            top: 0%;
+            left: 0%;
         }
 
-        .asia.init{
+        .asia.init {
             top: 100%;
-            left: 150%;
+            left: 100%;
+            opacity: 0;
         }
 
-        .asia.start{
+        .asia.step0 {
+            top: 70%;
+            left: 98%;
+        }
+
+        .asia.step1 {
             top: 50%;
             left: 80%;
         }
-        
 
+        .asia.step2 {
+            top: 40%;
+            left: 35%;
+        }
+
+        .asia.step3 {
+            top: 30%;
+            left: 70%;
+        }
+
+        .asia.step4 {
+            top: 20%;
+            left: 45%;
+        }
+
+        .asia.step5 {
+            top: 10%;
+            left: 50%;
+        }
 
         .botContainer {
             position: fixed;
@@ -112,11 +123,12 @@
 
         .botContainer.slideDown {
             top: 200vmin;
+            opacity: 0;
         }
 
         .tableElement {
             position: absolute;
-            color:yellow;
+            color: yellow;
             font-size: 4vmin;
             background: none;
 
@@ -153,6 +165,27 @@
             top: 33vmin;
             left: 44vmin;
         }
+
+        .hidden{
+            opacity: 0;
+        }
+
+        .congrats{
+            width: 30vmin;
+            max-width: 600px;
+            resize: both;
+            position: absolute;
+
+            margin-left: -5%;
+            margin-top: -5%;
+            display: block;
+
+            -webkit-transition-duration: 2000ms;
+            transition-duration: 2000ms;
+
+            top: 40%;
+            left: 40%;   
+        }
     </style>
 
 
@@ -166,18 +199,111 @@
             <div class="mountainContainer">
                 <img class="mountainHidden" style="visibility: hidden;" src="img/Swinica2.png">
                 <img class="asia init" src="img/Asia.png">
+                <img class="congrats hidden" src="img/Congratulations-Image.png">
             </div>
 
         </div>
         <div class="botContainer slideDown">
             <img class="millionaireTable" src="img/millionaire template2.png">
-            <div id="question" class="tableElement">question</div>
-            <div id="a1" class="answer tableElement">a1</div>
-            <div id="a2" class="answer tableElement">a2</div>
-            <div id="a3" class="answer tableElement">a3</div>
-            <div id="a4" class="answer tableElement">a4</div>
+            <div id="question" class="tableElement">Ready?? :)</div>
+            <div id="a1" class="answer tableElement">Click!</div>
+            <div id="a2" class="answer tableElement">Click!</div>
+            <div id="a3" class="answer tableElement">Click!</div>
+            <div id="a4" class="answer tableElement">Click!</div>
         </div>
     </div>
+
+
+
+
+    <script>
+        var currentStep = 0;
+
+        var quiz = [
+            { question: "q1", a1: "a11", a2: "a12", a3: "a13", a4: "a14", correct: 1 }
+            , { question: "q2", a1: "a21", a2: "a12", a3: "a13", a4: "a14", correct: 1 }
+            , { question: "q3", a1: "a31", a2: "a12", a3: "a13", a4: "a14", correct: 1 }
+            , { question: "q4", a1: "a41", a2: "a12", a3: "a13", a4: "a14", correct: 1 }
+
+        ];
+
+        var usedQNums = [];
+        var currentQNum = -1;
+        var minQNum = 0;
+        var maxQNum = quiz.length - 1;
+
+        var currentQuestion = {};
+
+        setTimeout(function () {
+            $('.botContainer')[0].classList.remove('slideDown');
+        }, 2000);
+
+        setTimeout(function () {
+            $('.asia')[0].classList.remove('init');
+            $('.asia')[0].classList.add('step0');
+        }, 800);
+
+        $('.botContainer').click(function () { nextQuestion(); });
+
+        function upStep() {
+            if (currentStep < 5) {
+                $('.asia')[0].classList.remove('step' + currentStep);
+                $('.asia')[0].classList.add('step' + (currentStep + 1));
+                currentStep += 1;
+
+                if (currentStep === 5) {
+                    $('.congrats')[0].classList.remove('hidden');
+                }
+            }
+        }
+
+        function downStep() {
+            if (currentStep > 0) {
+                $('.asia')[0].classList.remove('step' + currentStep);
+                $('.asia')[0].classList.add('step' + (currentStep - 1));
+                currentStep -= 1;
+            }
+        }
+
+        function randomizeQNum() {
+            if (usedQNums.length < quiz.length) {
+                while (usedQNums.includes(currentQNum) || currentQNum < minQNum || currentQNum > maxQNum) {
+                    currentQNum = Math.floor(Math.random() * (maxQNum - minQNum + 1)) + minQNum;
+                }
+            }
+        }
+
+        function nextQuestion() {
+
+            if (quiz.length > usedQNums.length) {
+                if (currentQNum > -1) usedQNums.push(currentQNum);
+                else $('.botContainer').off('click');
+                randomizeQNum();
+                currentQuestion = quiz[currentQNum];
+                $('#a1').text(currentQuestion.a1);
+                $('#a2').text(currentQuestion.a2);
+                $('#a3').text(currentQuestion.a3);
+                $('#a4').text(currentQuestion.a4);
+                $('#question').text(currentQuestion.question);
+
+                for (i = 1; i < 5; i++) {
+                    $('#a' + i).off('click');
+                    if (currentQuestion.correct === i) {
+                        $('#a' + i).click(function () {
+                            upStep();
+                            nextQuestion();
+                        })
+                    }
+                    else {
+                        $('#a' + i).click(function () {
+                            downStep();
+                            nextQuestion();
+                        })
+                    };
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>
