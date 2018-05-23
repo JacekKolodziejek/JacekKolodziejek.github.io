@@ -3,39 +3,60 @@
 
 <head>
 
-  <style>
-    html,
-    body {
-      margin: 0;
-      height: 100%;
-      background-color: black;
-    }
-    .mountain {
-    background-image: url('img/Swinica.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 80%;
-    position: relative;
-    margin:auto;
-   
-    resize: both;
-    /* you need to match the shadow color to your background or image border for the desired effect*/
-    box-shadow: 0 0 1em 1em black inset;
-}
-.mountainhidden {
-  width: 100%;
-}
-  </style>
+    <style>
+        html,
+        body {
+            margin: 0;
+            height: 100vh;
+            background-color: black;
+        }
 
-  <title>Page Title</title>
+        .mountainContainer {
+            background-image: url('img/Swinica.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 100vw;
+            position: relative;
+            margin: auto;
+            top: 10vh;
+
+            resize: both;
+            /* you need to match the shadow color to your background or image border for the desired effect*/
+            box-shadow: 0 0 5vh 5vw black inset;
+        }
+
+        .mountainHidden {
+            width: 100%;
+        }
+
+        .asia {
+            width: 10vw;
+            resize: both;
+            position: absolute;
+            top: 10vh;
+            left: 30vw;
+
+        }
+
+    </style>
+
+    <title>Page Title</title>
 </head>
 
 <body>
-  <div>
-      <div class="mountain">
-        <img class="mountainhidden" style="visibility: hidden;" src="img/Swinica.png">
-      </div>
-  </div>
+    <div>
+        <div class="mountainContainer">
+            <img class="mountainHidden" style="visibility: hidden;" src="img/Swinica.png">
+
+        </div>
+        <img class="asia" src="img/Asia.png">
+
+    </div>
+
+    <div>
+        <div id="asiaContainer">
+        </div>
+    </div>
 </body>
 
 </html>
