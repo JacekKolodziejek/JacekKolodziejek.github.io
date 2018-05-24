@@ -48,8 +48,8 @@
         }
 
         .asia {
-            width: 7.5vmin;
-            max-width: 450px;
+            width: 10vmin;
+            max-width: 600px;
             resize: both;
             position: absolute;
 
@@ -166,25 +166,37 @@
             left: 44vmin;
         }
 
-        .hidden{
+        .hidden {
             opacity: 0;
         }
 
-        .congrats{
-            width: 30vmin;
-            max-width: 600px;
+        .congrats {
+
+            display: block;
+            float: left;
+
+            height: 30vmin;
+            max-width: 25vmin;
+
+            resize: both;
+
+        }
+        .congratsContainer {
+            width: 90vmin;
+            max-width: 1200px;
             resize: both;
             position: absolute;
 
+
             margin-left: -5%;
             margin-top: -5%;
-            display: block;
+
 
             -webkit-transition-duration: 2000ms;
             transition-duration: 2000ms;
 
-            top: 40%;
-            left: 40%;   
+            top: 30%;
+            left: 5%;
         }
     </style>
 
@@ -199,13 +211,19 @@
             <div class="mountainContainer">
                 <img class="mountainHidden" style="visibility: hidden;" src="img/Swinica2.png">
                 <img class="asia init" src="img/Asia.png">
-                <img class="congrats hidden" src="img/Congratulations-Image.png">
+                <!-- <img class="congrats hidden" src="img/Congratulations-Image.png"> -->
+                <div class="congratsContainer hidden">
+                    <img class="congrats " src="img/derpy.jpg">
+                    <img class="congrats " src="img/Congrats.gif">
+                    <img class="congrats " src="img/pinkie.png">
+                </div>
             </div>
 
         </div>
         <div class="botContainer slideDown">
             <img class="millionaireTable" src="img/millionaire template2.png">
-            <div id="question" class="tableElement">Mountains demand wisdom.<br>Are you ready to test yours?</div>
+            <div id="question" class="tableElement">Mountains demand wisdom.
+                <br>Are you ready to test yours?</div>
             <div id="a1" class="answer tableElement">Click!</div>
             <div id="a2" class="answer tableElement">Click!</div>
             <div id="a3" class="answer tableElement">Click!</div>
@@ -220,24 +238,42 @@
         var currentStep = 0;
 
         var quiz = [
-            { question: "Which is NOT an Element of Harmony?", 
-            a1: "Honesty", a2: "Wisdom", a3: "Kindness", a4: "Laughter", correct: 2 }
-            , { question: "Who is the first villain in Friendship is Magic?", 
-            a1: "Celestia", a2: "Discord", a3: "Nightmare Moon", a4: "Commercials", correct: 3 }
-            , { question: "The ponies in Starlight Glimmer's town have what for Cutie Marks?", 
-            a1: "Three Stars", a2: "=", a3: "Client Logos", a4: "A Butterfly", correct: 2 }
-            , { question: "I like muffins, and have a cutie mark of bubbles, which pony am I?", 
-            a1: "Twilight Sparkle", a2: "Pinkie Pie", a3: "Fluttershy", a4: "Derpy Hooves", correct: 4 }
-            , { question: "What made Spike grow reaaaally big?", 
-            a1: "Twilight's error", a2: "Greed", a3: "Burmare King", a4: "Poisoned Apple", correct: 2 }
-            , { question: "In Parasprite Polka, Pinkie Pie did NOT use:", 
-            a1: "an Accordion", a2: "Cymbals", a3: "a Triangle", a4: "a French Horn", correct: 3 }
-            , { question: "What made Luna turn into Nightmare Moon?", 
-            a1: "Jealousy", a2: "Greed", a3: "Spike's breath", a4: "Bad dreams", correct: 1 }
-            , { question: "Sweetie Belle, Apple Bloom and Scootaloo are the...", 
-            a1: "Justice League", a2: "Cutie Hunters", a3: "Crusaders", a4: "Moulin Rouge", correct: 3 }
-            , { question: "Twilight Sparkle's hometown is...", 
-            a1: "Ponyville, doh!", a2: "Cloudsdale", a3: "Manehattan", a4: "Canterlot", correct: 4 }
+            {
+                question: "Which is NOT an Element of Harmony?",
+                a1: "Honesty", a2: "Wisdom", a3: "Kindness", a4: "Laughter", correct: 2
+            }
+            , {
+                question: "Who is the first villain in Friendship is Magic?",
+                a1: "Celestia", a2: "Discord", a3: "Nightmare Moon", a4: "Commercials", correct: 3
+            }
+            , {
+                question: "The ponies in Starlight Glimmer's town have what for Cutie Marks?",
+                a1: "Three Stars", a2: "=", a3: "Client Logos", a4: "A Butterfly", correct: 2
+            }
+            , {
+                question: "I like muffins, and have a cutie mark of bubbles, which pony am I?",
+                a1: "Twilight Sparkle", a2: "Pinkie Pie", a3: "Fluttershy", a4: "Derpy Hooves", correct: 4
+            }
+            , {
+                question: "What made Spike grow reaaaally big?",
+                a1: "Twilight's error", a2: "Greed", a3: "Burmare King", a4: "Poisoned Apple", correct: 2
+            }
+            , {
+                question: "In Parasprite Polka, Pinkie Pie did NOT use:",
+                a1: "an Accordion", a2: "Cymbals", a3: "a Triangle", a4: "a French Horn", correct: 3
+            }
+            , {
+                question: "What made Luna turn into Nightmare Moon?",
+                a1: "Jealousy", a2: "Greed", a3: "Spike's breath", a4: "Bad dreams", correct: 1
+            }
+            , {
+                question: "Sweetie Belle, Apple Bloom and Scootaloo are the...",
+                a1: "Justice League", a2: "Cutie Hunters", a3: "Crusaders", a4: "Moulin Rouge", correct: 3
+            }
+            , {
+                question: "Twilight Sparkle's hometown is...",
+                a1: "Ponyville, doh!", a2: "Cloudsdale", a3: "Manehattan", a4: "Canterlot", correct: 4
+            }
         ];
 
         var usedQNums = [];
@@ -265,7 +301,7 @@
                 currentStep += 1;
 
                 if (currentStep === 5) {
-                    $('.congrats')[0].classList.remove('hidden');
+                    $('.congratsContainer')[0].classList.remove('hidden');
                 }
             }
         }
@@ -279,14 +315,16 @@
         }
 
         function randomizeQNum() {
-            if (currentStep === 4 || quiz.length === usedQNums.length){
+            if (currentStep === 4 || quiz.length === usedQNums.length) {
                 quiz.push(
-                    { question: "What is Magic?", 
-                    a1: "Friendship", 
-                    a2: "Family", 
-                    a3: "Dreams", 
-                    a4: "Faith", 
-                    correct: 0 }
+                    {
+                        question: "What is Magic?",
+                        a1: "Friendship",
+                        a2: "Family",
+                        a3: "Dreams",
+                        a4: "Faith",
+                        correct: 0
+                    }
                 );
                 currentQNum = maxQNum = quiz.length - 1;
             }
@@ -299,7 +337,7 @@
 
         function nextQuestion() {
 
-            if (quiz.length >= usedQNums.length  && currentQuestion.correct !== 0) {
+            if (quiz.length >= usedQNums.length && currentQuestion.correct !== 0) {
                 if (currentQNum > -1) usedQNums.push(currentQNum);
                 else $('.botContainer').off('click');
                 randomizeQNum();
